@@ -42,7 +42,8 @@ function App() {
 
         {categories?.map((category, index) => (
           <div
-            style={{ display: index === currentCategory ? "block" : "none" }}
+            className={index === currentCategory ? "box" : "hidden"}
+            // style={{ display: index === currentCategory ? "block" : "none" }}
             key={index}
           >
             <CategoryForm
@@ -54,11 +55,11 @@ function App() {
           </div>
         ))}
         <div className="control-buttons">
-          <button disabled={currentCategory === 0} onClick={previous}>
+          <button disabled={currentCategory <= 0} onClick={previous}>
             Anterior
           </button>
           <button
-            disabled={currentCategory === categories!.length - 1}
+            disabled={currentCategory >= categories!.length - 1}
             onClick={next}
           >
             Próxima
