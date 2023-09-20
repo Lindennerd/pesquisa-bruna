@@ -63,31 +63,26 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 @media screen and (max-width: 600px) {
+  body {
+    place-items: start;
+  }
+  #root {
+    padding: 0;
+    margin: 0 auto;
+  }
+  #app {
+    padding: 0;
+    margin: 0 auto;
+  }
   body {
     margin: 0;
   }
   .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: flex;
+    width: 101%;
     height: auto;
-  }
-  #app {
-    margin-top: 5em;
   }
   h1 {
     font-size: 2.4em;
