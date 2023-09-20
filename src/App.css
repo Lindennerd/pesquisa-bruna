@@ -1,21 +1,25 @@
-body {
-  background-image: linear-gradient(to bottom, #45398b, #615a8c);
-}
-
-
 #root {
-  max-width: 1280px;
+  
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
+.control-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2em 0 0 0;
+}
+
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 8em;
+  width: 100%;
   will-change: filter;
   transition: filter 300ms;
 }
+
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -44,4 +48,10 @@ body {
 
 .read-the-docs {
   color: #888;
+} 
+
+.title-form {
+  background-color: #45398b;
+  border-radius: 10px;
+  padding: 2px 1em 2px 1em;
 }

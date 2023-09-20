@@ -1,6 +1,5 @@
-import { ChartData } from "chart.js";
-import { Category } from "./types";
 import { useCallback, useEffect, useState } from "react";
+import { Category } from "./types";
 
 import {
   Chart as ChartJS,
@@ -12,6 +11,7 @@ import {
   Legend,
   Colors,
   CategoryScale,
+  ChartData,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
 
@@ -29,14 +29,20 @@ ChartJS.register(
 ChartJS.defaults.color = "#fff";
 ChartJS.defaults.borderColor = "#ffffff";
 
-const defaultData: ChartData<"radar"> = {
-    labels: [],
-    datasets: []
+interface RadarChartProps {
+  categories: Category[] | null;
 }
 
-export const Chart = ({ categories }: { categories: Category[] | null}) => {
-  const [chartData, setChartData] = useState<ChartData<"radar">>(defaultData);
-
+export const RadarChart = (props: RadarChartProps) => {
+  const [chartData, setChartData] = useState<ChartData<"radar">>({
+    labels: [],
+    datasets: [
+      {
+        label: "Pessoal",
+        data: [],
+      },
+    ],
+  });
   function sumArray(array: number[]) {
     return array.reduce((a, b) => a + b, 0);
   }
@@ -46,13 +52,13 @@ export const Chart = ({ categories }: { categories: Category[] | null}) => {
   }, []);
 
   useEffect(() => {
-    if (!categories) return;
+    if (!props.categories) return;
     const data = {
-      labels: categories.map((category) => category.name),
+      labels: props.categories.map((category) => category.name),
       datasets: [
         {
           label: "Pessoal",
-          data: categories.map((category) =>
+          data: props.categories.map((category) =>
             averageArray(category.questions.map((question) => question.answer))
           ),
           backgroundColor: "#af086c",
@@ -63,14 +69,16 @@ export const Chart = ({ categories }: { categories: Category[] | null}) => {
     };
 
     setChartData(data);
-  }, [averageArray, categories]);
-  if(!categories) return (<></>)
+  }, [averageArray, props.categories]);
+
   return (
     <Radar
       data={chartData}
       options={{
         scales: {
           r: {
+            max: 10,
+            min: 0,
             grid: {
               color: "#fff",
             },
