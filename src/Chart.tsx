@@ -12,10 +12,12 @@ import {
   Colors,
   CategoryScale,
   ChartData,
+  ArcElement
 } from "chart.js";
-import { Radar } from "react-chartjs-2";
+import { PolarArea } from "react-chartjs-2";
 
 ChartJS.register(
+  ArcElement,
   RadialLinearScale,
   PointElement,
   LineElement,
@@ -34,7 +36,7 @@ interface RadarChartProps {
 }
 
 export const RadarChart = (props: RadarChartProps) => {
-  const [chartData, setChartData] = useState<ChartData<"radar">>({
+  const [chartData, setChartData] = useState<ChartData<"polarArea">>({
     labels: [],
     datasets: [
       {
@@ -61,8 +63,20 @@ export const RadarChart = (props: RadarChartProps) => {
           data: props.categories.map((category) =>
             averageArray(category.questions.map((question) => question.answer))
           ),
-          backgroundColor: "#af086c",
-          borderColor: "#af086c",
+          backgroundColor: [
+            "#14072D",
+            "#100938",
+            "#0C1042",
+            "#0F204C",
+            "#123456",
+            "#315A6E",
+            "#507E85",
+            "#6F9C99",
+            "#8EB2AA",
+            "#AEC9BD",
+            "#CEDFD5",
+          ],
+          borderColor: "#fff",
           borderWidth: 1,
         },
       ],
@@ -72,7 +86,7 @@ export const RadarChart = (props: RadarChartProps) => {
   }, [averageArray, props.categories]);
 
   return (
-    <Radar
+    <PolarArea
       data={chartData}
       options={{
         scales: {
