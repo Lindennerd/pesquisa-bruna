@@ -34,36 +34,42 @@ function App() {
   }
 
   return (
-    <div id="app">
-      <img className="logo" src={BrunaReisLogo} alt="Bruna Reis Logo" />
+    <>
+      <div id="app">
+        <img className="logo" src={BrunaReisLogo} alt="Bruna Reis Logo" />
 
-      <RadarChart categories={categories} />
+        <RadarChart categories={categories} />
 
-      {categories?.map((category, index) => (
-        <div
-          style={{ display: index === currentCategory ? "block" : "none" }}
-          key={index}
-        >
-          <CategoryForm
-            id={index}
-            name={category.name}
-            questions={category.questions}
-            onAnswer={setAnswer}
-          />
+        {categories?.map((category, index) => (
+          <div
+            style={{ display: index === currentCategory ? "block" : "none" }}
+            key={index}
+          >
+            <CategoryForm
+              id={index}
+              name={category.name}
+              questions={category.questions}
+              onAnswer={setAnswer}
+            />
+          </div>
+        ))}
+        <div className="control-buttons">
+          <button disabled={currentCategory === 0} onClick={previous}>
+            Anterior
+          </button>
+          <button
+            disabled={currentCategory === categories!.length - 1}
+            onClick={next}
+          >
+            Próxima
+          </button>
         </div>
-      ))}
-      <div className="control-buttons">
-        <button disabled={currentCategory === 0} onClick={previous}>
-          Anterior
-        </button>
-        <button
-          disabled={currentCategory === categories!.length - 1}
-          onClick={next}
-        >
-          Próxima
-        </button>
       </div>
-    </div>
+      <div style={{fontSize: "small", marginTop: "4em"}}>
+        <hr />
+        Luiz Paulo Lindenmaier @ 2023
+      </div>
+    </>
   );
 }
 
